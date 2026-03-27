@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace SunnySword.Player
 {
@@ -9,11 +8,15 @@ namespace SunnySword.Player
         [SerializeField]
         private float speed = 1;
 
+        private Animator animator;
+        private PlayerInput input;
         private new Rigidbody2D rigidbody;
 
         private void Start()
         {
             rigidbody = GetComponent<Rigidbody2D>();
+            input = GetComponent<PlayerInput>();
+            animator = GetComponent<Animator>();
         }
 
         public void Move(float horizontalInput, float verticalInput)

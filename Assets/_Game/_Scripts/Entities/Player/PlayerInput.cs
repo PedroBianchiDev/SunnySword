@@ -9,12 +9,15 @@ namespace SunnySword.Player
         public event Action OnAttackPressed;
         public event Action OnInteractPressed;
 
+        public bool IsShieldHeld { get; private set; }
+
         private void Update()
         {
             MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             if (Input.GetButtonDown("Fire1")) OnAttackPressed?.Invoke();
-            if (Input.GetButtonDown("Fire2")) OnInteractPressed?.Invoke();
+
+            IsShieldHeld = Input.GetButton("Fire2");
         }
     }
 }

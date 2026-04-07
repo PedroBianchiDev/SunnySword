@@ -1863,6 +1863,8 @@ GameObject:
   - component: {fileID: 1826044996}
   - component: {fileID: 1826044995}
   - component: {fileID: 1826045001}
+  - component: {fileID: 1826045002}
+  - component: {fileID: 1826045003}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2021,6 +2023,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f437040d3b592744aa080307b67414e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SunnySword::SunnySword.Animation.SpriteAnimator
+--- !u!114 &1826045002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826044994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd9bdbbfb69d9c4c9c9072898fb17d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SunnySword::SunnySword.Player.PlayerCombat
+  attackRange: 1.2
+  damage: 1
+  attackDelay: 0.3
+--- !u!114 &1826045003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826044994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d28e1c170a7cb6408d16a72d4d9ae54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SunnySword::SunnySword.Player.PlayerShield
+  defenseMoveSpeedMultiplier: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

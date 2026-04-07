@@ -17,6 +17,10 @@ namespace SunnySword.Playerr
 
         [Header("States")]
         private CharacterMovement movement;
+        private PlayerCombat combat;
+        private PlayerShield shield;
+        private bool isNextAttack = false;
+
         private Vector2 lastDirection = Vector2.down;
 
         private void Awake()
@@ -24,26 +28,63 @@ namespace SunnySword.Playerr
             input = GetComponent<PlayerInput>();
             movement = GetComponent<CharacterMovement>();
             spriteAnimator = GetComponent<SpriteAnimator>();
+            combat = GetComponent<PlayerCombat>();
+            shield = GetComponent<PlayerShield>();
+
+            input.OnAttackPressed += HandleAttack;
         }
 
         private void FixedUpdate()
         {
+            shield.SetBlocking(input.IsShieldHeld);
+
+            if (combat.IsAttacking || shield.IsBlocking)
+            {
+                movement.ProcessMove(Vector2.zero);
+
+                if (!combat.IsAttacking) HandleAnimation();
+                return;
+            }
+
             movement.ProcessMove(input.MoveInput);
             HandleAnimation();
         }
 
+        private void OnDestroy() => input.OnAttackPressed -= HandleAttack;
+
+        private void HandleAttack()
+        {
+            if (combat.IsAttacking) return;
+
+            Sprite[] selectedAttack = isNextAttack ? animData.secondAttackSprite : animData.firstAttackSprite;
+
+            isNextAttack = !isNextAttack;
+
+            float animDuration = spriteAnimator.PlayAnimation(selectedAttack, lastFlipX);
+            combat.PerformAttack(lastDirection, animDuration);
+        }
+
         private void HandleAnimation()
         {
-            Vector2 move = input.MoveInput;
-            bool isMoving = move.sqrMagnitude > 0.01f;
+            if (combat.IsAttacking) return;
 
-            if (move.x != 0)
+            if (shield.IsBlocking)
             {
-                lastFlipX = (move.x < 0);
+         
+                if (input.MoveInput.x != 0)
+                {
+                    lastFlipX = (input.MoveInput.x < 0);
+                }
+
+                spriteAnimator.PlayAnimation(animData.defenseSprite, lastFlipX);
+                return;
             }
 
-            if (isMoving)
+            Vector2 move = input.MoveInput;
+            if (move.sqrMagnitude > 0.01f)
             {
+                lastDirection = move;
+                lastFlipX = (move.x < 0);
                 spriteAnimator.PlayAnimation(animData.walkSprites, lastFlipX);
             }
             else

@@ -11,5 +11,12 @@ namespace SunnySword.Animation
 
         [Header("Walk")]
         public Sprite[] walkSprites;
+
+        [Header("Attack")]
+        public Sprite[] firstAttackSprite;
+        public Sprite[] secondAttackSprite;
+
+        [Header("Defense")]
+        public Sprite[] defenseSprite;
     }
 }

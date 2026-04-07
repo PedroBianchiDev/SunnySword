@@ -16,17 +16,20 @@ namespace SunnySword.Animation
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public void PlayAnimation(Sprite[] animationFrames, bool flipX)
+        public float PlayAnimation(Sprite[] animationFrames, bool flipX)
         {
             spriteRenderer.flipX = flipX;
 
-            if (currentAnimation == animationFrames) return;
+            if (currentAnimation != animationFrames)
+            {
+                currentAnimation = animationFrames;
+                currentFrame = 0;
+                timer = 0;
+                if (currentAnimation.Length > 0)
+                    spriteRenderer.sprite = currentAnimation[0];
+            }
 
-            currentAnimation = animationFrames;
-            currentFrame = 0;
-            timer = 0;
-            if (currentAnimation.Length > 0)
-                spriteRenderer.sprite = currentAnimation[0];
+            return animationFrames.Length * frameRate;
         }
 
         private void Update()

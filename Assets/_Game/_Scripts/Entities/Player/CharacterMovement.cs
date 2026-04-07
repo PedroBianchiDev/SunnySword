@@ -6,25 +6,18 @@ namespace SunnySword.Player
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField]
-        private float speed = 1;
-
+        private float speed = 5;
         private new Rigidbody2D rigidbody;
 
-        private void Start()
+        private void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();  
+            rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        public void Move(float horizontalInput, float verticalInput)
-        { 
-            Vector2 direction = new Vector2(horizontalInput, verticalInput);
-            rigidbody.linearVelocity = direction * speed;
-        }
-
-        public void Stop()
+        public void ProcessMove(Vector2 direction)
         {
-            rigidbody.linearVelocity = Vector2.zero;
+            Vector2 velocity = direction.normalized * speed;
+            rigidbody.linearVelocity = velocity;
         }
-
     }
 }

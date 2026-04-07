@@ -1,21 +1,20 @@
+using System;
 using UnityEngine;
 
 namespace SunnySword.Player
 {
     public class PlayerInput : MonoBehaviour
     {
-        public float HorizontalInput { get; private set; }
-        public float VerticalInput { get; private set; }
-        public bool AttackInput { get; private set; }
-        public bool InteractionInput { get; private set; }
+        public Vector2 MoveInput { get; private set; }
+        public event Action OnAttackPressed;
+        public event Action OnInteractPressed;
 
         private void Update()
         {
-            HorizontalInput = Input.GetAxis("Horizontal");
-            VerticalInput = Input.GetAxis("Vertical");
+            MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (Input.GetButtonDown("Fire1")) AttackInput = true;
-            if (Input.GetButtonDown("Fire1")) InteractionInput = true;
+            if (Input.GetButtonDown("Fire1")) OnAttackPressed?.Invoke();
+            if (Input.GetButtonDown("Fire2")) OnInteractPressed?.Invoke();
         }
     }
 }

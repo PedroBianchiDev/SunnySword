@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb0611cc4375f4bb21f254000eeae3, type: 3}
+  m_Name: AnimPlayer
+  m_EditorClassIdentifier: SunnySword::SunnySword.Animation.CharacterAnimationData
+  idleSprites:
+  - {fileID: 7384290322352760091, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: 5558041129755138300, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: 5494728702781700201, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: 855971943943930739, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: 8590257050535953886, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: -1175184007495930954, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  - {fileID: -4675935811743254547, guid: 7a03c9985379f4c4f96f6d8dcb762dcb, type: 3}
+  walkSprites:
+  - {fileID: -432731726981308715, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}
+  - {fileID: 8551124423323264409, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}
+  - {fileID: -8600065048725663906, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}
+  - {fileID: 3241423924572654580, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}
+  - {fileID: -5828329696384875631, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}
+  - {fileID: 2022560608615539102, guid: c51013e6446da7c499e7c4c115f8b30d, type: 3}

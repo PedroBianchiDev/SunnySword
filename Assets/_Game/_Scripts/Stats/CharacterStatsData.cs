@@ -15,7 +15,8 @@ namespace SunnySword.Stats
         [Header("Stamina")]
         public float maxStamina = 100f;
         public float staminaRegenRate = 15f; 
-        public float blockStaminaCost = 10f; 
+        public float blockStaminaCost = 10f;
+        public float staminaRegenDelay = 1f;
 
         [Header("Movement")]
         public float baseMoveSpeed = 5f;

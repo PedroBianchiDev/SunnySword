@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: SunnySword::SunnySword.Stats.CharacterStatsData
   maxHealth: 100
-  maxMan: 50
+  maxMana: 100
   manaRegenRate: 2
   maxStamina: 100
-  staminaRegenRate: 15
-  blockStaminaCost: 10
+  staminaRegenRate: 10
+  blockStaminaCost: 20
+  staminaRegenDelay: 1
   baseMoveSpeed: 5
   baseDamage: 10

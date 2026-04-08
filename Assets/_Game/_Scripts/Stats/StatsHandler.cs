@@ -13,6 +13,8 @@ namespace SunnySword.Stats
 
         public bool CanRegenerateStamina { get; set; } = true;
 
+        private float currentStaminaRegenDelay;
+
         public event Action OnStatsChanged;
 
         private void Awake()
@@ -31,11 +33,15 @@ namespace SunnySword.Stats
 
         private void RegenerateResources()
         {
-            CurrentMana = Mathf.MoveTowards(CurrentMana, Data.maxMana, Data.manaRegenRate * Time.deltaTime);
+            CurrentMana = Mathf.MoveTowards(CurrentMana, data.maxMana, data.manaRegenRate * Time.deltaTime);
 
-            if (CanRegenerateStamina && CurrentStamina < Data.maxStamina)
+            if (currentStaminaRegenDelay > 0)
             {
-                CurrentStamina = Mathf.MoveTowards(CurrentStamina, Data.maxStamina, Data.staminaRegenRate * Time.deltaTime);
+                currentStaminaRegenDelay -= Time.deltaTime;
+            }
+            else if (CanRegenerateStamina && CurrentStamina < data.maxStamina)
+            {
+                CurrentStamina = Mathf.MoveTowards(CurrentStamina, data.maxStamina, data.staminaRegenRate * Time.deltaTime);
             }
 
             OnStatsChanged?.Invoke();
@@ -57,6 +63,7 @@ namespace SunnySword.Stats
         public void ConsumeBlockStamina()
         {
             CurrentStamina = Mathf.Max(0, CurrentStamina - data.blockStaminaCost * Time.deltaTime);
+            currentStaminaRegenDelay = data.staminaRegenDelay;
             OnStatsChanged?.Invoke();
         }
 

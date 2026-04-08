@@ -1,5 +1,6 @@
 using SunnySword.Animation;
 using SunnySword.Player;
+using SunnySword.Stats;
 using UnityEngine;
 
 namespace SunnySword.Playerr
@@ -16,6 +17,7 @@ namespace SunnySword.Playerr
         private PlayerInput input;
 
         [Header("States")]
+        private StatsHandler statsHandler;
         private CharacterMovement movement;
         private PlayerCombat combat;
         private PlayerShield shield;
@@ -30,18 +32,29 @@ namespace SunnySword.Playerr
             spriteAnimator = GetComponent<SpriteAnimator>();
             combat = GetComponent<PlayerCombat>();
             shield = GetComponent<PlayerShield>();
+            statsHandler = GetComponent<StatsHandler>();
 
             input.OnAttackPressed += HandleAttack;
         }
 
         private void FixedUpdate()
         {
-            shield.SetBlocking(input.IsShieldHeld);
+            bool canShield = input.IsShieldHeld && statsHandler.CurrentStamina > 0;
+            shield.SetBlocking(canShield);
+
+            if (shield.IsBlocking)
+            {
+                statsHandler.CanRegenerateStamina = false; 
+                statsHandler.ConsumeBlockStamina();        
+            }
+            else
+            {
+                statsHandler.CanRegenerateStamina = true;  
+            }
 
             if (combat.IsAttacking || shield.IsBlocking)
             {
                 movement.ProcessMove(Vector2.zero);
-
                 if (!combat.IsAttacking) HandleAnimation();
                 return;
             }

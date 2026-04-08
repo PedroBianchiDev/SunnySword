@@ -1,16 +1,20 @@
-using System;
-using System.Collections;
 using UnityEngine;
+using System.Collections;
+using SunnySword.Stats; 
 
 namespace SunnySword.Player
 {
     public class PlayerCombat : MonoBehaviour
     {
         [SerializeField] private float attackRange = 1.2f;
-        [SerializeField] private int damage = 1;
-        [SerializeField] private float attackDelay = 0.3f;
 
+        private StatsHandler statsHandler; 
         public bool IsAttacking { get; private set; }
+
+        private void Awake()
+        {
+            statsHandler = GetComponent<StatsHandler>();
+        }
 
         public void PerformAttack(Vector2 direction, float duration)
         {
@@ -27,7 +31,12 @@ namespace SunnySword.Player
             Vector2 attackPosition = (Vector2)transform.position + direction.normalized * 0.8f;
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange);
 
-            foreach (Collider2D enemy in hitEnemies) { }
+            int damageToDeal = statsHandler.Data.baseDamage;
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log($"Acertou: {enemy.name} com {damageToDeal} de dano!");
+            }
 
             IsAttacking = false;
         }
@@ -38,5 +47,4 @@ namespace SunnySword.Player
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
-
 }

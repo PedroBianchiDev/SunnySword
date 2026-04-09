@@ -9,6 +9,7 @@ namespace SunnySword.SkillsTree
         [Header("Informações Base")]
         public string nodeName;
         [TextArea] public string description;
+        public Sprite nodeIcon;
         public int costInPoints = 1;
 
         [Header("Pré-requisitos")]

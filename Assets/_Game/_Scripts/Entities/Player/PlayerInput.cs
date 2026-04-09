@@ -38,7 +38,6 @@ namespace SunnySword.Player
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                // Vamos tentar comprar a habilidade direto para ver se o sistema bloqueia
                 GetComponent<SkillsTree.PlayerSkillTree>().TryUnlockNode(Resources.Load<SkillsTree.SkillNodeData>("Node_Guerreiro_Cleave"));
             }
         }

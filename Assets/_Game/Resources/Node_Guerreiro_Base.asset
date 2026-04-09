@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Node_Guerreiro_Base
   m_EditorClassIdentifier: SunnySword::SunnySword.SkillsTree.SkillNodeData
   nodeName: "Treinamento B\xE1sico"
-  description: 
+  description: "Teste de descri\xE7\xE3o Treinamento B\xE1sico"
+  nodeIcon: {fileID: -2187471619270954700, guid: d021302a5e331f9469b0723cf086c57b, type: 3}
   costInPoints: 1
   prerequisites: []
   abilityToUnlock: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Node_Guerreiro_Cleave
   m_EditorClassIdentifier: SunnySword::SunnySword.SkillsTree.SkillNodeData
   nodeName: "Corte Girat\xF3rio"
-  description: 
+  description: "Teste de descri\xE7\xE3o Corte Girat\xF3rio"
+  nodeIcon: {fileID: -2785567299067377396, guid: 8c26ab825d2403c4f9d77dcdd98a8ea0, type: 3}
   costInPoints: 1
   prerequisites:
   - {fileID: 11400000, guid: 5efccc6fc4f41ef4295b2a00650d291c, type: 2}

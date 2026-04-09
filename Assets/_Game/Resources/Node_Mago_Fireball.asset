@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3219aafb5d332a4bb5e1a970caf6334, type: 3}
   m_Name: Node_Mago_Fireball
   m_EditorClassIdentifier: SunnySword::SunnySword.SkillsTree.SkillNodeData
-  nodeName: 
-  description: 
+  nodeName: Arrow
+  description: teste arow blabla
+  nodeIcon: {fileID: -4346244404228752641, guid: 7fa083ea0ee7ee244b9a3b38a0d31f31, type: 3}
   costInPoints: 1
   prerequisites: []
   abilityToUnlock: {fileID: 0}

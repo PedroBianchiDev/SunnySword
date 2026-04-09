@@ -9,7 +9,7 @@ namespace SunnySword.SkillsTree
     public class PlayerSkillTree : MonoBehaviour
     {
         [Header("Progresso")]
-        public int availableSkillPoints = 3; // Dando 3 pontos para você testar
+        public int availableSkillPoints = 3; 
 
         [Tooltip("Lista de nós que já foram desbloqueados")]
         public List<SkillNodeData> unlockedNodes = new List<SkillNodeData>();

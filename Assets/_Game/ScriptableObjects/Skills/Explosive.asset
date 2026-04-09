@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1305b6bf73096499dc1957984f5887, type: 3}
-  m_Name: Skill_Cleave
+  m_Name: Explosive
   m_EditorClassIdentifier: SunnySword::SunnySword.Abilities.MeleeAbility
-  abilityName: Skill_Cleave
+  abilityName: Explosive
   manaCost: 10
   cooldown: 2
   damageMultiplier: 3

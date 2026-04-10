@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Explosive
   m_EditorClassIdentifier: SunnySword::SunnySword.Abilities.MeleeAbility
   abilityName: Explosive
+  description: 
+  icon: {fileID: 0}
   manaCost: 10
   cooldown: 2
   damageMultiplier: 3
-  flatBonusDamage: 3
+  flatBonusDamage: 10
   damagePopupPrefab: {fileID: 951699920316551086, guid: c40720071c8c35144b199d4bfd99c1fe, type: 3}
   areaRadius: 0.8
   offsetDistance: 0.8

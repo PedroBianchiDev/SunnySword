@@ -1,0 +1,663 @@
+fileFormatVersion: 2
+guid: 214404931c587d64abf97975361ad7d1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 937970938803541425
+    second: Boompuff_Shoot_0
+  - first:
+      213: 4332470551893267463
+    second: Boompuff_Shoot_1
+  - first:
+      213: 6793609929061511364
+    second: Boompuff_Shoot_2
+  - first:
+      213: -3731745383327731297
+    second: Boompuff_Shoot_3
+  - first:
+      213: -5940707803255542220
+    second: Boompuff_Shoot_4
+  - first:
+      213: 1996709121593561551
+    second: Boompuff_Shoot_5
+  - first:
+      213: -131641655394549441
+    second: Boompuff_Shoot_6
+  - first:
+      213: 3319046614577058004
+    second: Boompuff_Shoot_7
+  - first:
+      213: -2633583963978760419
+    second: Boompuff_Shoot_8
+  - first:
+      213: -4991246778654655662
+    second: Boompuff_Shoot_9
+  - first:
+      213: 4766675738549454668
+    second: Boompuff_Shoot_10
+  - first:
+      213: 6826026041032498789
+    second: Boompuff_Shoot_11
+  - first:
+      213: 5816504899109763173
+    second: Boompuff_Shoot_12
+  - first:
+      213: 8907204191333495275
+    second: Boompuff_Shoot_13
+  - first:
+      213: 6135961775806636035
+    second: Boompuff_Shoot_14
+  - first:
+      213: -2306921829192809748
+    second: Boompuff_Shoot_15
+  - first:
+      213: -2825131801229917813
+    second: Boompuff_Shoot_16
+  - first:
+      213: 3239805816418104081
+    second: Boompuff_Shoot_17
+  - first:
+      213: -667364522211313410
+    second: Boompuff_Shoot_18
+  - first:
+      213: -8537296878489285290
+    second: Boompuff_Shoot_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boompuff_Shoot_0
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 55
+        width: 76
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b556096997540d00800000000000000
+      internalID: 937970938803541425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_1
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 56
+        width: 69
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70450753307002c30800000000000000
+      internalID: 4332470551893267463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_2
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 128
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c037448c30c74e50800000000000000
+      internalID: 6793609929061511364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_3
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 127
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f91fb82785d263cc0800000000000000
+      internalID: -3731745383327731297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_4
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 132
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43eef886abd5e8da0800000000000000
+      internalID: -5940707803255542220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_5
+      rect:
+        serializedVersion: 2
+        x: 1269
+        y: 126
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc1dd58fd5cb5bb10800000000000000
+      internalID: 1996709121593561551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_6
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 56
+        width: 73
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f314094ac905c2ef0800000000000000
+      internalID: -131641655394549441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_7
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 55
+        width: 87
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d014d69f4f9f0e20800000000000000
+      internalID: 3319046614577058004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_8
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 56
+        width: 92
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1f71ec8651a37bd0800000000000000
+      internalID: -2633583963978760419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_9
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 49
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25bf9f3ef778bbab0800000000000000
+      internalID: -4991246778654655662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_10
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 60
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4786bb4452a62240800000000000000
+      internalID: 4766675738549454668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_11
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 49
+        width: 67
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ede4bb48aeabe50800000000000000
+      internalID: 6826026041032498789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_12
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 65
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568b1c9736068b050800000000000000
+      internalID: 5816504899109763173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_13
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 62
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be1bd46050fbc9b70800000000000000
+      internalID: 8907204191333495275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_14
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 56
+        width: 73
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3006452b9b0572550800000000000000
+      internalID: 6135961775806636035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_15
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 50
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce24e56a1da2cffd0800000000000000
+      internalID: -2306921829192809748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 51
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b810800589d1bc8d0800000000000000
+      internalID: -2825131801229917813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_17
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 50
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11378dc893a16fc20800000000000000
+      internalID: 3239805816418104081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_18
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 51
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef875edb08b0db6f0800000000000000
+      internalID: -667364522211313410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boompuff_Shoot_19
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 50
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d4897b8bd658980800000000000000
+      internalID: -8537296878489285290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Boompuff_Shoot_0: 937970938803541425
+      Boompuff_Shoot_1: 4332470551893267463
+      Boompuff_Shoot_10: 4766675738549454668
+      Boompuff_Shoot_11: 6826026041032498789
+      Boompuff_Shoot_12: 5816504899109763173
+      Boompuff_Shoot_13: 8907204191333495275
+      Boompuff_Shoot_14: 6135961775806636035
+      Boompuff_Shoot_15: -2306921829192809748
+      Boompuff_Shoot_16: -2825131801229917813
+      Boompuff_Shoot_17: 3239805816418104081
+      Boompuff_Shoot_18: -667364522211313410
+      Boompuff_Shoot_19: -8537296878489285290
+      Boompuff_Shoot_2: 6793609929061511364
+      Boompuff_Shoot_3: -3731745383327731297
+      Boompuff_Shoot_4: -5940707803255542220
+      Boompuff_Shoot_5: 1996709121593561551
+      Boompuff_Shoot_6: -131641655394549441
+      Boompuff_Shoot_7: 3319046614577058004
+      Boompuff_Shoot_8: -2633583963978760419
+      Boompuff_Shoot_9: -4991246778654655662
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

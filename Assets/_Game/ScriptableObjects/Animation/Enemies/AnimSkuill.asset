@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb0611cc4375f4bb21f254000eeae3, type: 3}
+  m_Name: AnimSkuill
+  m_EditorClassIdentifier: SunnySword::SunnySword.Animation.CharacterAnimationData
+  idleSprites:
+  - {fileID: 6471116574714101982, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: -5517189045170451702, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: -3851594745550769105, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: -519783078402261626, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: -1479804600476029548, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: 475156675953305093, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: 4517073765492241108, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  - {fileID: -5281771008486882139, guid: 58f6a8d1f3e73e94b9e11cdfd2faad4b, type: 3}
+  walkSprites:
+  - {fileID: -821572354167042970, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  - {fileID: 6183830700080795110, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  - {fileID: -5611761047925831525, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  - {fileID: -992156223813187085, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  - {fileID: 3058856078925539220, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  - {fileID: 6398057966443142182, guid: 4441c4b8f818c314da06fc233755bc6f, type: 3}
+  firstAttackSprite:
+  - {fileID: -3801873587596287892, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: 8453705797323160443, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: -2608325685640080977, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: 5677903959620856961, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: 7921673209264098965, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: -8617964307106720966, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  - {fileID: -2380647909382967109, guid: 8e1fcdee719aded4eac54c30294d2af3, type: 3}
+  secondAttackSprite: []
+  defenseSprite:
+  - {fileID: 4585887404816075010, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: 1458890408966233160, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: 1440176955350386689, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: -5585492037162905027, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: 5034910292777789398, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: -3511898316428907538, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}
+  - {fileID: 4506625478859674692, guid: 2ed00918c2a120644b62d73442679d8d, type: 3}

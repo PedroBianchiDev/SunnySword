@@ -22,15 +22,9 @@ namespace SunnySword.Abilities
         {
             if (other.gameObject == caster) return;
 
-            Debug.Log($"Projétil acertou {other.name} causando {damageToDeal} de dano!");
-
-            if (popupPrefab != null)
+            if (other.TryGetComponent<Combat.IDamageable>(out Combat.IDamageable damageableTarget))
             {
-                GameObject popup = Instantiate(popupPrefab);
-                if (popup.TryGetComponent<UI.DamagePopup>(out UI.DamagePopup popupScript))
-                {
-                    popupScript.Setup(damageToDeal, other.gameObject);
-                }
+                damageableTarget.TakeDamage(damageToDeal);
             }
 
             Destroy(gameObject);

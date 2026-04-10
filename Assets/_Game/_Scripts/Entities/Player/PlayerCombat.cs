@@ -1,66 +1,62 @@
 using UnityEngine;
-using System.Collections;
-using SunnySword.Stats; 
+using SunnySword.Stats;
+using SunnySword.Abilities;
 
 namespace SunnySword.Player
 {
     public class PlayerCombat : MonoBehaviour
     {
-        [SerializeField] private float attackRange = 1.2f;
+        [Header("Referências")]
+        public StatsHandler statsHandler;
 
-        private StatsHandler statsHandler;
+        [Tooltip("Arraste aqui a habilidade do seu Clique do Mouse")]
+        public AttackAbilityData basicAttack;
 
-        [Header("Effects")]
-        public GameObject damagePopupPrefab;
+        [Tooltip("Arraste aqui a habilidade da tecla E")]
+        public AttackAbilityData currentSkill;
 
-        public bool IsAttacking { get; private set; }
+        [Header("Teclas")]
+        public KeyCode skillKey = KeyCode.E;
 
-        private void Awake()
+        public bool IsAttacking { get; set; }
+
+        private void Update()
         {
-            statsHandler = GetComponent<StatsHandler>();
+            if (statsHandler == null) return;
+
+            HandleSkill();
         }
 
-        public void PerformAttack(Vector2 direction, float duration)
+        public void PerformAttack(Vector2 attackDirection, float duration)
         {
             if (IsAttacking) return;
-            StartCoroutine(AttackRoutine(direction, duration));
-        }
 
-        private IEnumerator AttackRoutine(Vector2 direction, float duration)
-        {
             IsAttacking = true;
 
-            yield return new WaitForSeconds(duration * 0.5f);
-
-            Vector2 attackPosition = (Vector2)transform.position + direction.normalized * 0.8f;
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange);
-
-            int damageToDeal = statsHandler.Data.baseDamage;
-
-
-            foreach (Collider2D enemy in hitEnemies)
+            if (basicAttack != null)
             {
-                Debug.Log($"Acertou: {enemy.name} com {damageToDeal} de dano!");
-
-                if (damagePopupPrefab != null)
-                {
-                    GameObject popup = Instantiate(damagePopupPrefab);
-
-                    if (popup.TryGetComponent<UI.DamagePopup>(out UI.DamagePopup popupScript))
-                    {
-                        popupScript.Setup(damageToDeal, enemy.gameObject);
-                    }
-                }
+                Vector2 targetPos = (Vector2)transform.position + attackDirection;
+                basicAttack.Execute(this.gameObject, targetPos);
             }
 
-            yield return new WaitForSeconds(duration * 0.5f);
+            Invoke(nameof(ResetAttackState), duration);
+        }
+
+        private void ResetAttackState()
+        {
             IsAttacking = false;
         }
 
-        private void OnDrawGizmosSelected()
+        private void HandleSkill()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            if (Input.GetKeyDown(skillKey) && !IsAttacking)
+            {
+                if (statsHandler.CurrentMana >= currentSkill.manaCost)
+                {
+                    statsHandler.UseMana(currentSkill.manaCost);
+                    currentSkill.Execute(this.gameObject, transform.position);
+                }
+            }
         }
     }
 }

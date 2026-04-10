@@ -1,4 +1,5 @@
 using UnityEngine;
+using SunnySword.Combat;
 
 namespace SunnySword.Abilities
 {
@@ -32,15 +33,10 @@ namespace SunnySword.Abilities
             {
                 if (hit.gameObject == caster) continue;
 
-                Debug.Log($"{abilityName} acertou {hit.name} causando {finalDamage} de dano!");
-
-                if (damagePopupPrefab != null)
+                if (hit.TryGetComponent<IDamageable>(out IDamageable target))
                 {
-                    GameObject popup = Instantiate(damagePopupPrefab);
-                    if (popup.TryGetComponent<UI.DamagePopup>(out UI.DamagePopup popupScript))
-                    {
-                        popupScript.Setup(finalDamage, hit.gameObject);
-                    }
+                    target.TakeDamage(finalDamage);
+                    Debug.Log($"{abilityName} acertou {hit.name} causando {finalDamage} de dano!");
                 }
             }
         }

@@ -1,11 +1,16 @@
 using UnityEngine;
 using System;
+using SunnySword.Combat; // 1. Importamos o namespace do IDamageable
 
 namespace SunnySword.Stats
 {
-    public class StatsHandler : MonoBehaviour
+    // 2. Assinamos o contrato adicionando ", IDamageable"
+    public class StatsHandler : MonoBehaviour, IDamageable
     {
         [SerializeField] private CharacterStatsData data;
+
+        [Header("UI do Combate")]
+        public GameObject damagePopupPrefab; // 3. O Prefab do número flutuante
 
         public float CurrentHealth { get; private set; }
         public float CurrentMana { get; private set; }
@@ -51,6 +56,16 @@ namespace SunnySword.Stats
         {
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             OnStatsChanged?.Invoke();
+
+            if (damagePopupPrefab != null)
+            {
+                GameObject popup = Instantiate(damagePopupPrefab);
+                if (popup.TryGetComponent<SunnySword.UI.DamagePopup>(out var popupScript))
+                {
+                    popupScript.Setup(Mathf.RoundToInt(amount), this.gameObject);
+                }
+            }
+
             if (CurrentHealth <= 0) Debug.Log("Died");
         }
 

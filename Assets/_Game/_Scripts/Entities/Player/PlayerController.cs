@@ -42,6 +42,8 @@ namespace SunnySword.Playerr
             bool canShield = input.IsShieldHeld && statsHandler.CurrentStamina > 0;
             shield.SetBlocking(canShield);
 
+            statsHandler.IsBlocking = canShield;
+
             if (shield.IsBlocking)
             {
                 statsHandler.CanRegenerateStamina = false; 

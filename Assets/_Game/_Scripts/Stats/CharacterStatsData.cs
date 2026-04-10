@@ -23,5 +23,9 @@ namespace SunnySword.Stats
 
         [Header("Combat")]
         public int baseDamage = 10;
+
+        [Range(0f, 1f)]
+        [Tooltip("Porcentagem de dano defendido (0.2 = 20%, 1.0 = 100% de defesa)")]
+        public float blockDamageReduction = 0.2f;
     }
 }

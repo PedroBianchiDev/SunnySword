@@ -21,3 +21,4 @@ MonoBehaviour:
   staminaRegenDelay: 1
   baseMoveSpeed: 5
   baseDamage: 999
+  blockDamageReduction: 0.2

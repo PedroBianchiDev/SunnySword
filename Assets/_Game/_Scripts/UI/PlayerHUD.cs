@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using SunnySword.Stats;
+using TMPro;
 
 namespace SunnySword.UI
 {
@@ -13,6 +14,8 @@ namespace SunnySword.UI
         [SerializeField] private Image healthBarFill;
         [SerializeField] private Image manaBarFill;
         [SerializeField] private Image staminaBarFill;
+        [SerializeField] private Image expBarFill; 
+        [SerializeField] private TextMeshProUGUI levelText;
 
         private void OnEnable()
         {
@@ -45,8 +48,18 @@ namespace SunnySword.UI
             if (manaBarFill != null)
                 manaBarFill.fillAmount = playerStats.CurrentMana / playerStats.Data.maxMana;
 
+            if (expBarFill != null)
+            {
+                expBarFill.fillAmount = playerStats.CurrentExp / playerStats.ExpToNextLevel;
+            }
+
             if (staminaBarFill != null)
                 staminaBarFill.fillAmount = playerStats.CurrentStamina / playerStats.Data.maxStamina;
+
+            if (levelText != null)
+            {
+                levelText.text = $"{playerStats.CurrentLevel}";
+            }
         }
     }
 }

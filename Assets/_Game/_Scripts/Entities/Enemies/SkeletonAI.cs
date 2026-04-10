@@ -32,6 +32,12 @@ namespace SunnySword.Enemies
         [Header("Referências")]
         public Transform playerTarget;
 
+
+        [Header("Recompensas")]
+        public float expReward = 35f; 
+        public GameObject[] lootPrefabs; 
+        [Range(0f, 1f)] public float dropChance = 0.5f; 
+
         private Rigidbody2D rb;
         private SpriteRenderer sr;
         private float lastAttackTime;
@@ -198,9 +204,25 @@ namespace SunnySword.Enemies
         private void Die()
         {
             isDead = true;
-            rb.simulated = false;
-            sr.color = Color.gray;
-            Destroy(gameObject, 2f);
+            rb.simulated = false; 
+
+            if (playerTarget != null && playerTarget.TryGetComponent<Stats.StatsHandler>(out var stats))
+            {
+                stats.AddExp(expReward);
+            }
+
+            if (lootPrefabs.Length > 0 && Random.value <= dropChance)
+            {
+                int randomIndex = Random.Range(0, lootPrefabs.Length);
+                GameObject itemToDrop = lootPrefabs[randomIndex];
+
+                Instantiate(itemToDrop, transform.position, Quaternion.identity);
+                Debug.Log("[LOOT] O inimigo dropou um item!");
+            }
+
+            if (TryGetComponent<SpriteRenderer>(out SpriteRenderer sr)) sr.color = Color.gray;
+
+            Destroy(gameObject, 1.5f); 
         }
     }
 }

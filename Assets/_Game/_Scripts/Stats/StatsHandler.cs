@@ -1,22 +1,25 @@
 using UnityEngine;
 using System;
-using SunnySword.Combat; // 1. Importamos o namespace do IDamageable
+using SunnySword.Combat; 
 
 namespace SunnySword.Stats
 {
-    // 2. Assinamos o contrato adicionando ", IDamageable"
     public class StatsHandler : MonoBehaviour, IDamageable
     {
         [SerializeField] private CharacterStatsData data;
 
         [Header("UI do Combate")]
-        public GameObject damagePopupPrefab; // 3. O Prefab do número flutuante
+        public GameObject damagePopupPrefab; 
 
         public float CurrentHealth { get; private set; }
         public float CurrentMana { get; private set; }
         public float CurrentStamina { get; private set; }
 
         public bool CanRegenerateStamina { get; set; } = true;
+        public bool IsBlocking { get; set; } = false;
+        public float CurrentExp { get; private set; }
+        public int CurrentLevel { get; private set; } = 1;
+        public float ExpToNextLevel => CurrentLevel * 100f;
 
         private float currentStaminaRegenDelay;
 
@@ -54,6 +57,12 @@ namespace SunnySword.Stats
 
         public void TakeDamage(float amount)
         {
+            if (IsBlocking)
+            {        
+                amount = amount * (1f - data.blockDamageReduction);
+                Debug.Log($"[DEFESA] Ataque bloqueado! Dano reduzido para {amount}");
+            }
+
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             OnStatsChanged?.Invoke();
 
@@ -79,6 +88,36 @@ namespace SunnySword.Stats
         {
             CurrentStamina = Mathf.Max(0, CurrentStamina - data.blockStaminaCost * Time.deltaTime);
             currentStaminaRegenDelay = data.staminaRegenDelay;
+            OnStatsChanged?.Invoke();
+        }
+
+        public void AddExp(float amount)
+        {
+            CurrentExp += amount;
+            Debug.Log($"[SISTEMA] Ganhou {amount} EXP! Total: {CurrentExp} / {ExpToNextLevel}");
+
+            if (CurrentExp >= ExpToNextLevel)
+            {
+                LevelUp();
+            }
+            OnStatsChanged?.Invoke();
+        }
+
+        private void LevelUp()
+        {
+            CurrentExp -= ExpToNextLevel; 
+            CurrentLevel++;
+
+            Debug.Log($"[SISTEMA] LEVEL UP! Bem-vindo ao Nível {CurrentLevel}!");
+
+            Heal(data.maxHealth);
+            CurrentMana = data.maxMana;
+        }
+
+        public void Heal(float amount)
+        {
+            CurrentHealth = Mathf.Min(data.maxHealth, CurrentHealth + amount);
+            Debug.Log($"[CURA] Recuperou {amount} de vida!");
             OnStatsChanged?.Invoke();
         }
 

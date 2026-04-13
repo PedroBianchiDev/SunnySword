@@ -107,5 +107,10 @@ namespace SunnySword.Playerr
                 spriteAnimator.PlayAnimation(animData.idleSprites, lastFlipX);
             }
         }
+
+        public void UpdateAnimationData(CharacterAnimationData newAnimData)
+        {
+            this.animData = newAnimData;
+        }
     }
 }

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb0611cc4375f4bb21f254000eeae3, type: 3}
+  m_Name: AnimArcher
+  m_EditorClassIdentifier: SunnySword::SunnySword.Animation.CharacterAnimationData
+  idleSprites:
+  - {fileID: 7257567913506708742, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  - {fileID: -7989796299022447421, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  - {fileID: 7725435616784934678, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  - {fileID: -1293103732667120055, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  - {fileID: 427913027731640163, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  - {fileID: -9045297040117572726, guid: 0f6d30badadeb514c9e317b7080943de, type: 3}
+  walkSprites:
+  - {fileID: 8882666270506729424, guid: e17162afda6cc9b4c82baac21776c6cd, type: 3}
+  - {fileID: 8418572898541717210, guid: e17162afda6cc9b4c82baac21776c6cd, type: 3}
+  - {fileID: 4917221495796577052, guid: e17162afda6cc9b4c82baac21776c6cd, type: 3}
+  - {fileID: 1313344751431586703, guid: e17162afda6cc9b4c82baac21776c6cd, type: 3}
+  firstAttackSprite:
+  - {fileID: -3522987849309635434, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: 1796539565894229437, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: -6164423668334797513, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: 8855168420743222378, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: 8284549177786691415, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: -2689744893154487746, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: 500622343033487627, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  - {fileID: 7309834836266252465, guid: 38bbb5557ae1ff640a01cd6d99d4d16f, type: 3}
+  secondAttackSprite: []
+  defenseSprite: []

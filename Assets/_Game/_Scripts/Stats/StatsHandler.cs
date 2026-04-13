@@ -121,6 +121,20 @@ namespace SunnySword.Stats
             OnStatsChanged?.Invoke();
         }
 
+        public void LoadCharacterData(CharacterStatsData newData)
+        {
+            this.data = newData;
+
+            CurrentHealth = Mathf.Min(CurrentHealth, data.maxHealth);
+            CurrentMana = Mathf.Min(CurrentMana, data.maxMana);
+            CurrentStamina = Mathf.Min(CurrentStamina, data.maxStamina);
+        }
+
+        public void TriggerStatsUpdate()
+        {
+            OnStatsChanged?.Invoke();
+        }
+
         public bool HasStamina => CurrentStamina > 0;
         public CharacterStatsData Data => data;
     }

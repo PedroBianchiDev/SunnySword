@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6ccd5eec1b38274d8ce755fb60b80e0, type: 3}
-  m_Name: PlayerStats
+  m_Name: WarriorStats
   m_EditorClassIdentifier: SunnySword::SunnySword.Stats.CharacterStatsData
   maxHealth: 100
   maxMana: 100

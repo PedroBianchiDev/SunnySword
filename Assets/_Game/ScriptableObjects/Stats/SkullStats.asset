@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6ccd5eec1b38274d8ce755fb60b80e0, type: 3}
-  m_Name: WarriorStats
+  m_Name: SkullStats
   m_EditorClassIdentifier: SunnySword::SunnySword.Stats.CharacterStatsData
-  characterName: Warrior
-  portrait: {fileID: 6856901680134642022, guid: 81076d9cb9ccea041a447cfbdbf04f09, type: 3}
+  characterName: Skull
+  portrait: {fileID: -3181094002445039874, guid: ad8f71dcab87e2a45a76122ab66c0d2c, type: 3}
   maxHealth: 100
-  maxMana: 100
-  manaRegenRate: 2
+  maxMana: 0
+  manaRegenRate: 0
   maxStamina: 100
-  staminaRegenRate: 12.92
-  blockStaminaCost: 1
+  staminaRegenRate: 10
+  blockStaminaCost: 20
   staminaRegenDelay: 1
   baseMoveSpeed: 5
-  baseDamage: 999
+  baseDamage: 1
   blockDamageReduction: 0.2

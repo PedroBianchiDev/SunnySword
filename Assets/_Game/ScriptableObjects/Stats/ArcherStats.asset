@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ccd5eec1b38274d8ce755fb60b80e0, type: 3}
   m_Name: ArcherStats
   m_EditorClassIdentifier: SunnySword::SunnySword.Stats.CharacterStatsData
+  characterName: Arqueiro
+  portrait: {fileID: -8308548904405912246, guid: 31f714bb5598e624d892cc722d120926, type: 3}
   maxHealth: 90
   maxMana: 50
   manaRegenRate: 2
@@ -20,5 +22,5 @@ MonoBehaviour:
   blockStaminaCost: 10
   staminaRegenDelay: 1
   baseMoveSpeed: 6
-  baseDamage: 11
+  baseDamage: 1
   blockDamageReduction: 0.2

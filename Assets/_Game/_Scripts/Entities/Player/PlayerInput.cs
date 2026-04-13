@@ -36,6 +36,8 @@ namespace SunnySword.Player
             if (Input.GetKeyDown(KeyCode.Q)) OnSkill1Pressed?.Invoke();
             if (Input.GetKeyDown(KeyCode.E)) OnSkill2Pressed?.Invoke();
 
+            if (Input.GetKeyDown(KeyCode.F)) OnInteractPressed?.Invoke();
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 GetComponent<SkillsTree.PlayerSkillTree>().TryUnlockNode(Resources.Load<SkillsTree.SkillNodeData>("Node_Guerreiro_Cleave"));

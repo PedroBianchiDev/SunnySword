@@ -45,5 +45,11 @@ namespace SunnySword.Animation
                 spriteRenderer.sprite = currentAnimation[currentFrame];
             }
         }
+
+        public void StopAnimation()
+        {
+            currentAnimation = null;
+            spriteRenderer.sprite = null; 
+        }
     }
 }

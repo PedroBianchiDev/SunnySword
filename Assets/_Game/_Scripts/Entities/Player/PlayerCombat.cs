@@ -1,62 +1,39 @@
 using UnityEngine;
 using SunnySword.Stats;
 using SunnySword.Abilities;
+using SunnySword.Combat; 
 
 namespace SunnySword.Player
 {
     public class PlayerCombat : MonoBehaviour
     {
-        [Header("Referências")]
-        public StatsHandler statsHandler;
+        private EntityCombat entityCombat;
+        private StatsHandler statsHandler;
 
-        [Tooltip("Arraste aqui a habilidade do seu Clique do Mouse")]
+        [Header("Configurações de Ataque")]
         public AttackAbilityData basicAttack;
 
-        [Tooltip("Arraste aqui a habilidade da tecla E")]
-        public AttackAbilityData currentSkill;
-
-        [Header("Teclas")]
-        public KeyCode skillKey = KeyCode.E;
-
-        public bool IsAttacking { get; set; }
-
-        private void Update()
+        private void Awake()
         {
-            if (statsHandler == null) return;
+            statsHandler = GetComponent<StatsHandler>();
+            entityCombat = GetComponent<EntityCombat>();
 
-            HandleSkill();
+            if (entityCombat == null)
+            {
+                Debug.LogError($"EntityCombat não encontrado no {gameObject.name}! Adicione o componente no Inspector.");
+            }
         }
 
-        public void PerformAttack(Vector2 attackDirection, float duration)
+        public void PerformAttack(Vector2 attackDirection, Sprite[] animSprites, int hitFrame)
         {
-            if (IsAttacking) return;
-
-            IsAttacking = true;
-
-            if (basicAttack != null)
+            if (basicAttack != null && entityCombat != null)
             {
                 Vector2 targetPos = (Vector2)transform.position + attackDirection;
-                basicAttack.Execute(this.gameObject, targetPos);
-            }
 
-            Invoke(nameof(ResetAttackState), duration);
-        }
-
-        private void ResetAttackState()
-        {
-            IsAttacking = false;
-        }
-
-        private void HandleSkill()
-        {
-            if (Input.GetKeyDown(skillKey) && !IsAttacking)
-            {
-                if (statsHandler.CurrentMana >= currentSkill.manaCost)
-                {
-                    statsHandler.UseMana(currentSkill.manaCost);
-                    currentSkill.Execute(this.gameObject, transform.position);
-                }
+                entityCombat.Attack(basicAttack, targetPos, animSprites, hitFrame);
             }
         }
+
+        public bool IsAttacking => entityCombat != null && entityCombat.IsAttacking;
     }
 }

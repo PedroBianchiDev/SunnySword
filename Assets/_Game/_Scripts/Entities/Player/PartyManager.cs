@@ -1,44 +1,76 @@
 using UnityEngine;
 using System.Collections.Generic;
-using SunnySword.Stats;
+using SunnySword.UI;
+using SunnySword.Player; 
 
-namespace SunnySword.Player
+public class PartyManager : MonoBehaviour
 {
-    public class PartyManager : MonoBehaviour
+    public static PartyManager Instance { get; private set; }
+
+    [Header("Configurações")]
+    public GameObject playerObject;
+    public List<GameObject> activeParty = new List<GameObject>();
+
+    private void Awake()
     {
-        [Header("Configuração do Grupo")]
-        public List<CharacterStatsData> partyMembers = new List<CharacterStatsData>();
-        public int activeMemberIndex = 0;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
-        [Header("Referências")]
-        private StatsHandler playerStats;
-        private PlayerCombat playerCombat;
-
-        private void Awake()
+    private void Start()
+    {
+        if (playerObject != null && !activeParty.Contains(playerObject))
         {
-            playerStats = GetComponent<StatsHandler>();
-            playerCombat = GetComponent<PlayerCombat>();
+            activeParty.Add(playerObject);
         }
 
-        private void Update()
+        UpdateHUD();
+    }
+
+    public void AddMember(GameObject memberSource)
+    {
+        if (memberSource == null) return;
+
+        GameObject finalMember = memberSource;
+
+        if (memberSource.scene.name == null)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchMember(0);
-            if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchMember(1);
-            if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchMember(2);
+            finalMember = Instantiate(memberSource, playerObject.transform.position, Quaternion.identity);
         }
 
-        public void SwitchMember(int index)
+        if (!activeParty.Contains(finalMember))
         {
-            if (index < 0 || index >= partyMembers.Count || index == activeMemberIndex) return;
+            activeParty.Add(finalMember);
 
-            activeMemberIndex = index;
-            CharacterStatsData nextMember = partyMembers[activeMemberIndex];
+            if (finalMember.TryGetComponent<PartyMemberFollower>(out var follower))
+            {
+                follower.playerTransform = playerObject.transform;
+                follower.enabled = true;
+            }
 
-            playerStats.LoadCharacterData(nextMember);
+            Debug.Log($"[Party] {finalMember.name} adicionado com sucesso.");
+            UpdateHUD();
+        }
+    }
 
-            Debug.Log($"[PARTY] Trocado para: {nextMember.name}");
+    public void RemoveMember(GameObject member)
+    {
+        if (activeParty.Contains(member))
+        {
+            activeParty.Remove(member);
+            UpdateHUD();
+        }
+    }
 
-            playerStats.TriggerStatsUpdate();
+    public void UpdateHUD()
+    {
+        if (PartyHUDManager.Instance != null)
+        {
+            List<GameObject> soAliados = new List<GameObject>(activeParty);
+
+            if (playerObject != null) soAliados.Remove(playerObject);
+
+            PartyHUDManager.Instance.RefreshHUD(soAliados);
         }
     }
 }

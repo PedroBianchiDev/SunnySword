@@ -72,11 +72,9 @@ namespace SunnySword.Playerr
             if (combat.IsAttacking) return;
 
             Sprite[] selectedAttack = isNextAttack ? animData.secondAttackSprite : animData.firstAttackSprite;
-
             isNextAttack = !isNextAttack;
 
-            float animDuration = spriteAnimator.PlayAnimation(selectedAttack, lastFlipX);
-            combat.PerformAttack(lastDirection, animDuration);
+            combat.PerformAttack(lastDirection, selectedAttack, 2);
         }
 
         private void HandleAnimation()

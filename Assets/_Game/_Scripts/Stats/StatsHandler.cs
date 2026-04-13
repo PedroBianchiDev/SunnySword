@@ -1,37 +1,37 @@
 using UnityEngine;
 using System;
-using SunnySword.Combat; 
+using SunnySword.Combat;
 
 namespace SunnySword.Stats
 {
     public class StatsHandler : MonoBehaviour, IDamageable
     {
         [SerializeField] private CharacterStatsData data;
+        public CharacterStatsData Data => data;
 
-        [Header("UI do Combate")]
-        public GameObject damagePopupPrefab; 
+        [Header("UI & Feedback")]
+        public GameObject damagePopupPrefab;
 
         public float CurrentHealth { get; private set; }
         public float CurrentMana { get; private set; }
         public float CurrentStamina { get; private set; }
 
-        public bool CanRegenerateStamina { get; set; } = true;
-        public bool IsBlocking { get; set; } = false;
         public float CurrentExp { get; private set; }
         public int CurrentLevel { get; private set; } = 1;
         public float ExpToNextLevel => CurrentLevel * 100f;
 
+        public bool CanRegenerateStamina { get; set; } = true;
+        public bool IsBlocking { get; set; } = false;
+
         private float currentStaminaRegenDelay;
 
         public event Action OnStatsChanged;
+        public event Action OnDeath;
 
         private void Awake()
         {
             if (data == null) return;
-
-            CurrentHealth = data.maxHealth;
-            CurrentMana = data.maxMana;
-            CurrentStamina = data.maxStamina;
+            ResetStats();
         }
 
         private void Update()
@@ -39,43 +39,84 @@ namespace SunnySword.Stats
             RegenerateResources();
         }
 
+        public void ResetStats()
+        {
+            if (data == null) return;
+            CurrentHealth = data.maxHealth;
+            CurrentMana = data.maxMana;
+            CurrentStamina = data.maxStamina;
+
+            OnStatsChanged?.Invoke();
+        }
+
         private void RegenerateResources()
         {
+            float previousMana = CurrentMana;
+            float previousStamina = CurrentStamina;
+
             CurrentMana = Mathf.MoveTowards(CurrentMana, data.maxMana, data.manaRegenRate * Time.deltaTime);
 
             if (currentStaminaRegenDelay > 0)
             {
                 currentStaminaRegenDelay -= Time.deltaTime;
             }
-            else if (CanRegenerateStamina && CurrentStamina < data.maxStamina)
+            else if (CanRegenerateStamina && !IsBlocking)
             {
                 CurrentStamina = Mathf.MoveTowards(CurrentStamina, data.maxStamina, data.staminaRegenRate * Time.deltaTime);
             }
 
-            OnStatsChanged?.Invoke();
+            if (CurrentMana != previousMana || CurrentStamina != previousStamina)
+            {
+                OnStatsChanged?.Invoke();
+            }
         }
 
         public void TakeDamage(float amount)
         {
+            if (CurrentHealth <= 0) return;
+
+            int finalDamage = Mathf.RoundToInt(amount);
+
             if (IsBlocking)
-            {        
-                amount = amount * (1f - data.blockDamageReduction);
-                Debug.Log($"[DEFESA] Ataque bloqueado! Dano reduzido para {amount}");
+            {
+                finalDamage = Mathf.RoundToInt(finalDamage * (1f - data.blockDamageReduction));
+                ConsumeBlockStamina();
             }
 
-            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
-            OnStatsChanged?.Invoke();
+            CurrentHealth -= finalDamage;
 
             if (damagePopupPrefab != null)
             {
                 GameObject popup = Instantiate(damagePopupPrefab);
                 if (popup.TryGetComponent<SunnySword.UI.DamagePopup>(out var popupScript))
                 {
-                    popupScript.Setup(Mathf.RoundToInt(amount), this.gameObject);
+                    popupScript.Setup(finalDamage, this.gameObject);
                 }
             }
 
-            if (CurrentHealth <= 0) Debug.Log("Died");
+            OnStatsChanged?.Invoke();
+
+            if (CurrentHealth <= 0)
+            {
+                CurrentHealth = 0;
+                OnDeath?.Invoke();
+            }
+        }
+
+
+        public void ConsumeStamina(float amount)
+        {
+            CurrentStamina = Mathf.Max(0, CurrentStamina - amount);
+            currentStaminaRegenDelay = data.staminaRegenDelay;
+            OnStatsChanged?.Invoke();
+        }
+
+        public void ConsumeBlockStamina() => ConsumeStamina(data.blockStaminaCost);
+
+        public void Heal(float amount)
+        {
+            CurrentHealth = Mathf.Min(data.maxHealth, CurrentHealth + amount);
+            OnStatsChanged?.Invoke();
         }
 
         public void UseMana(float amount)
@@ -84,18 +125,10 @@ namespace SunnySword.Stats
             OnStatsChanged?.Invoke();
         }
 
-        public void ConsumeBlockStamina()
-        {
-            CurrentStamina = Mathf.Max(0, CurrentStamina - data.blockStaminaCost * Time.deltaTime);
-            currentStaminaRegenDelay = data.staminaRegenDelay;
-            OnStatsChanged?.Invoke();
-        }
 
         public void AddExp(float amount)
         {
             CurrentExp += amount;
-            Debug.Log($"[SISTEMA] Ganhou {amount} EXP! Total: {CurrentExp} / {ExpToNextLevel}");
-
             if (CurrentExp >= ExpToNextLevel)
             {
                 LevelUp();
@@ -105,29 +138,20 @@ namespace SunnySword.Stats
 
         private void LevelUp()
         {
-            CurrentExp -= ExpToNextLevel; 
+            CurrentExp -= ExpToNextLevel;
             CurrentLevel++;
-
-            Debug.Log($"[SISTEMA] LEVEL UP! Bem-vindo ao Nível {CurrentLevel}!");
-
             Heal(data.maxHealth);
             CurrentMana = data.maxMana;
+            Debug.Log($"[LEVEL UP] Nível {CurrentLevel} alcançado!");
         }
 
-        public void Heal(float amount)
-        {
-            CurrentHealth = Mathf.Min(data.maxHealth, CurrentHealth + amount);
-            Debug.Log($"[CURA] Recuperou {amount} de vida!");
-            OnStatsChanged?.Invoke();
-        }
 
         public void LoadCharacterData(CharacterStatsData newData)
         {
             this.data = newData;
 
-            CurrentHealth = Mathf.Min(CurrentHealth, data.maxHealth);
-            CurrentMana = Mathf.Min(CurrentMana, data.maxMana);
-            CurrentStamina = Mathf.Min(CurrentStamina, data.maxStamina);
+            ResetStats();
+            OnStatsChanged?.Invoke();
         }
 
         public void TriggerStatsUpdate()
@@ -135,7 +159,6 @@ namespace SunnySword.Stats
             OnStatsChanged?.Invoke();
         }
 
-        public bool HasStamina => CurrentStamina > 0;
-        public CharacterStatsData Data => data;
+
     }
 }

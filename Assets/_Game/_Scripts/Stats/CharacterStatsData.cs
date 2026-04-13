@@ -5,6 +5,10 @@ namespace SunnySword.Stats
     [CreateAssetMenu(fileName = "New Character Stats", menuName = "SunnySword/Stats/CharacterData")]
     public class CharacterStatsData : ScriptableObject
     {
+        [Header("Identidade")]
+        public string characterName;
+        public Sprite portrait;
+
         [Header("Life")]
         public float maxHealth = 100f;
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   manaCost: 30
-  cooldown: 2
+  cooldown: 1
   damageMultiplier: 2
   flatBonusDamage: 1
   damagePopupPrefab: {fileID: 951699920316551086, guid: c40720071c8c35144b199d4bfd99c1fe, type: 3}

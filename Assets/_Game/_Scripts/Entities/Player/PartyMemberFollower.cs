@@ -1,7 +1,7 @@
 using UnityEngine;
 using SunnySword.Animation;
 using SunnySword.Abilities;
-using SunnySword.Stats; 
+using SunnySword.Stats;
 
 namespace SunnySword.Player
 {
@@ -13,14 +13,13 @@ namespace SunnySword.Player
         public float followSpeed = 5f;
         public float stoppingDistance = 0.5f;
 
-        [Header("Dados do Membro (Scriptable Objects)")]
-        public CharacterStatsData statsData;      
-        public AttackAbilityData combatAbility;    
-
-        [Header("Configurações de Combate")]
+        [Header("Combate")]
+        public AttackAbilityData combatAbility;
         public float attackCooldown = 2f;
         public LayerMask enemyLayer;
         private float nextAttackTime;
+
+        private bool isAttacking;
 
         [Header("Visual")]
         public CharacterAnimationData animData;
@@ -30,90 +29,87 @@ namespace SunnySword.Player
         private void Awake()
         {
             spriteAnimator = GetComponent<SpriteAnimator>();
-
-            if (playerTransform != null)
-            {
-                Collider2D myCollider = GetComponent<Collider2D>();
-                Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
-
-                if (myCollider != null && playerCollider != null)
-                {
-                    Physics2D.IgnoreCollision(myCollider, playerCollider);
-                }
-            }
         }
 
         private void Update()
         {
             if (playerTransform == null) return;
 
+            if (isAttacking) return;
+
             HandleCombat();
             HandleMovement();
         }
-
         private void HandleCombat()
         {
             if (combatAbility == null || Time.time < nextAttackTime) return;
 
             float detectionRange = 5f;
-            if (combatAbility is MeleeAbility melee)
+            if (combatAbility is MeleeAbility melee) detectionRange = melee.offsetDistance + melee.areaRadius;
+
+            Collider2D enemy = Physics2D.OverlapCircle(transform.position, detectionRange, enemyLayer);
+
+            if (enemy != null && !enemy.CompareTag("Player"))
             {
-                detectionRange = melee.offsetDistance + melee.areaRadius;
+                StartCoroutine(PerformAttackRoutine(enemy.transform.position));
             }
+        }
 
-            Collider2D[] potentialTargets = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
+        private System.Collections.IEnumerator PerformAttackRoutine(Vector3 targetPos)
+        {
+            isAttacking = true;
 
-            Collider2D targetEnemy = null;
-            float closestDistance = Mathf.Infinity;
+            lastFlipX = targetPos.x < transform.position.x;
 
-            foreach (var col in potentialTargets)
+            float animDuration = spriteAnimator.PlayAnimation(animData.firstAttackSprite, lastFlipX);
+
+            int frameDeDisparo = 3; 
+            float atrasoParaDisparar = frameDeDisparo * 0.1f; 
+
+            float elapsed = 0f;
+            bool jaDisparou = false;
+
+            while (elapsed < animDuration)
             {
-                if (col.CompareTag("Player") || col.gameObject == gameObject) continue;
+                elapsed += Time.deltaTime;
 
-                float distanceToEnemy = Vector2.Distance(transform.position, col.transform.position);
+                spriteAnimator.PlayAnimation(animData.firstAttackSprite, lastFlipX);
 
-                if (distanceToEnemy < closestDistance)
+                if (!jaDisparou && elapsed >= atrasoParaDisparar)
                 {
-                    closestDistance = distanceToEnemy;
-                    targetEnemy = col;
+                    combatAbility.Execute(this.gameObject, targetPos);
+                    jaDisparou = true;
                 }
+
+                yield return null;
             }
 
-            if (targetEnemy != null)
-            {
-                combatAbility.Execute(this.gameObject, targetEnemy.transform.position);
-                nextAttackTime = Time.time + attackCooldown;
-            }
+            isAttacking = false;
+            nextAttackTime = Time.time + attackCooldown;
         }
 
         private void HandleMovement()
         {
+            if (isAttacking) return;
+
             bool playerFlipped = playerTransform.GetComponent<SpriteRenderer>().flipX;
             float currentOffsetX = playerFlipped ? -formationOffset.x : formationOffset.x;
-            Vector3 relativeOffset = new Vector3(currentOffsetX, formationOffset.y, 0);
+            Vector3 targetPosition = playerTransform.position + new Vector3(currentOffsetX, formationOffset.y, 0);
 
-            Vector3 targetPosition = playerTransform.position + relativeOffset;
             float distance = Vector2.Distance(transform.position, targetPosition);
 
             if (distance > stoppingDistance)
             {
                 transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
+
                 Vector2 moveDir = (targetPosition - transform.position).normalized;
                 if (Mathf.Abs(moveDir.x) > 0.1f) lastFlipX = moveDir.x < 0;
+
                 spriteAnimator.PlayAnimation(animData.walkSprites, lastFlipX);
             }
             else
             {
-                spriteAnimator.PlayAnimation(animData.idleSprites, playerFlipped);
-            }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            if (combatAbility is MeleeAbility melee)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(transform.position, melee.offsetDistance + melee.areaRadius);
+                spriteAnimator.PlayAnimation(animData.idleSprites, lastFlipX);
             }
         }
     }

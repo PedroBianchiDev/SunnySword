@@ -4,10 +4,11 @@ using SunnySword.Combat;
 
 namespace SunnySword.Stats
 {
-    public class StatsHandler : MonoBehaviour, IDamageable
+    public class StatsHandler : MonoBehaviour, SunnySword.Combat.IDamageable
     {
         [SerializeField] private CharacterStatsData data;
         public CharacterStatsData Data => data;
+        private bool IsDead;
 
         [Header("UI & Feedback")]
         public GameObject damagePopupPrefab;
@@ -73,6 +74,8 @@ namespace SunnySword.Stats
 
         public void TakeDamage(float amount)
         {
+            Debug.Log($"[DANO] {gameObject.name} foi atingido! Dano bruto: {amount}");
+
             if (CurrentHealth <= 0) return;
 
             int finalDamage = Mathf.RoundToInt(amount);
@@ -98,8 +101,7 @@ namespace SunnySword.Stats
 
             if (CurrentHealth <= 0)
             {
-                CurrentHealth = 0;
-                OnDeath?.Invoke();
+                Die();
             }
         }
 
@@ -159,6 +161,11 @@ namespace SunnySword.Stats
             OnStatsChanged?.Invoke();
         }
 
+        private void Die()
+        {
+            IsDead = true;
+            OnDeath?.Invoke();
+        }
 
     }
 }

@@ -1,7 +1,8 @@
-using UnityEngine;
-using SunnySword.Animation;
 using SunnySword.Abilities;
+using SunnySword.Animation;
 using SunnySword.Combat; // Novo namespace
+using SunnySword.Stats;
+using UnityEngine;
 
 namespace SunnySword.Player
 {
@@ -18,7 +19,8 @@ namespace SunnySword.Player
         public float attackCooldown = 2f;
         public float detectionRange = 5f;
         public LayerMask enemyLayer;
-        public int attackHitFrame = 2; 
+        public int attackHitFrame = 2;
+        private bool isDead = false;
 
         [Header("Visual")]
         public CharacterAnimationData animData;
@@ -26,6 +28,7 @@ namespace SunnySword.Player
         private SpriteAnimator spriteAnimator;
         private Rigidbody2D rb;
         private EntityCombat entityCombat;
+        private StatsHandler stats;
         private float nextAttackTime;
         private bool lastFlipX;
 
@@ -34,27 +37,28 @@ namespace SunnySword.Player
             spriteAnimator = GetComponent<SpriteAnimator>();
             entityCombat = GetComponent<EntityCombat>();
             rb = GetComponent<Rigidbody2D>();
+            stats = GetComponent<StatsHandler>();
+        }
+
+        void Start()
+        {
+            if (stats != null) stats.OnDeath += OnDeath;
         }
 
         private void Update()
         {
-            if (playerTransform == null) return;
+            if (isDead || playerTransform == null) return;
 
-            // 1. PRIORIDADE TOTAL AO COMBATE
-            // Se o motor de combate diz que está atacando, paramos o script aqui mesmo.
             if (entityCombat.IsAttacking)
             {
-                rb.linearVelocity = Vector2.zero; // Garante que ele não deslize atacando
+                rb.linearVelocity = Vector2.zero; 
                 return;
             }
 
-            // 2. TENTA ATACAR
             HandleCombat();
 
-            // 3. SE COMEÇOU UM ATAQUE AGORA, SAI DO UPDATE
             if (entityCombat.IsAttacking) return;
 
-            // 4. SÓ MOVE SE NÃO ESTIVER FAZENDO NADA DE COMBATE
             HandleMovement();
         }
 
@@ -69,6 +73,15 @@ namespace SunnySword.Player
                 entityCombat.Attack(combatAbility, enemy.transform.position, animData.firstAttackSprite, attackHitFrame);
                 nextAttackTime = Time.time + attackCooldown;
             }
+        }
+
+        void OnDeath()
+        {
+            isDead = true;
+
+            if (rb != null) rb.linearVelocity = Vector2.zero;
+
+            Invoke("DeactivateAfterDeath", 0.1f);
         }
 
         private void HandleMovement()
@@ -92,6 +105,12 @@ namespace SunnySword.Player
             {
                 spriteAnimator.PlayAnimation(animData.idleSprites, lastFlipX);
             }
+        }
+
+        private void DeactivateAfterDeath()
+        {
+            gameObject.SetActive(false);
+            Debug.Log($"[Party] {gameObject.name} foi removido da cena por morte.");
         }
     }
 }

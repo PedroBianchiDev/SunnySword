@@ -18,7 +18,7 @@ MonoBehaviour:
   manaCost: 30
   cooldown: 1
   damageMultiplier: 2
-  flatBonusDamage: 1
+  flatBonusDamage: 5
   damagePopupPrefab: {fileID: 951699920316551086, guid: c40720071c8c35144b199d4bfd99c1fe, type: 3}
   projectilePrefab: {fileID: 5525199620227399640, guid: e1a98c1d4474ad342b6e1cba995674cc, type: 3}
   projectileSpeed: 15

@@ -86,6 +86,8 @@ namespace SunnySword.Player
 
         private void HandleMovement()
         {
+            if (isDead) return;
+
             bool playerFlipped = playerTransform.GetComponent<SpriteRenderer>().flipX;
             float currentOffsetX = playerFlipped ? -formationOffset.x : formationOffset.x;
             Vector3 targetPosition = playerTransform.position + new Vector3(currentOffsetX, formationOffset.y, 0);
@@ -94,7 +96,7 @@ namespace SunnySword.Player
 
             if (distance > stoppingDistance)
             {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
 
                 Vector2 moveDir = (targetPosition - transform.position).normalized;
                 if (Mathf.Abs(moveDir.x) > 0.1f) lastFlipX = moveDir.x < 0;

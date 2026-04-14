@@ -35,6 +35,9 @@ namespace SunnySword.Enemies
         private float nextAttackTime;
         private float nextSearchTime;
 
+        [Header("Recompensas")]
+        public float expGrant = 50f; 
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -138,6 +141,21 @@ namespace SunnySword.Enemies
         {
             if (isDead) return;
             isDead = true;
+
+            if (PartyManager.Instance != null)
+            {
+                foreach (GameObject member in PartyManager.Instance.activeParty)
+                {
+                    if (member != null && member.activeInHierarchy)
+                    {
+                        if (member.TryGetComponent<StatsHandler>(out var memberStats))
+                        {
+                            memberStats.AddExp(expGrant);
+                        }
+                    }
+                }
+            }
+
             rb.linearVelocity = Vector2.zero;
             rb.simulated = false;
             spriteAnimator.StopAnimation();

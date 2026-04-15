@@ -16,8 +16,8 @@ TagManager:
   - Player
   - AllyProjectile
   - Ally
-  - 
-  - 
+  - MinimapOnly
+  - FogOfWar
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 762072121
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 32134035
     locked: 0
   m_RenderingLayers:
   - Default

@@ -17,7 +17,7 @@ namespace SunnySword.Abilities
 
             if (projGO.TryGetComponent<Projectile>(out var proj))
             {
-                proj.Setup(CalculateDamage(caster), projectileSpeed, caster);
+                proj.Setup(CalculateDamage(caster), projectileSpeed, caster, targetLayer);
             }
         }
     }

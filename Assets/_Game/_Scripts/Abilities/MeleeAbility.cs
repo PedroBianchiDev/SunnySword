@@ -26,7 +26,8 @@ namespace SunnySword.Abilities
                 Destroy(visual, effectDuration);
             }
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(hitCenter, areaRadius);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(hitCenter, areaRadius, targetLayer);
+
             int finalDamage = CalculateDamage(caster);
 
             foreach (var hit in hits)

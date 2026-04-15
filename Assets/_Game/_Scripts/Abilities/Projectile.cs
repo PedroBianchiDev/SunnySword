@@ -1,22 +1,24 @@
 using UnityEngine;
-using SunnySword.Combat; 
+using SunnySword.Combat;
+
 public class Projectile : MonoBehaviour
 {
     private float damage;
     private float speed;
     private GameObject owner;
+    private LayerMask targetLayer; 
 
-    public void Setup(float damage, float speed, GameObject owner)
+    public void Setup(float damage, float speed, GameObject owner, LayerMask targetLayer)
     {
         this.damage = damage;
         this.speed = speed;
         this.owner = owner;
+        this.targetLayer = targetLayer; 
 
         Collider2D projCol = GetComponent<Collider2D>();
         if (projCol != null)
         {
             Physics2D.IgnoreCollision(projCol, owner.GetComponent<Collider2D>());
-
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null) Physics2D.IgnoreCollision(projCol, player.GetComponent<Collider2D>());
         }
@@ -33,13 +35,20 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject == owner || collision.CompareTag("Player")) return;
 
-        if (collision.TryGetComponent<IDamageable>(out var target))
+        Debug.Log($"A flecha tocou em: {collision.name} na layer {LayerMask.LayerToName(collision.gameObject.layer)}");
+
+        if (((1 << collision.gameObject.layer) & targetLayer) != 0)
         {
-            target.TakeDamage(damage);
-            Destroy(gameObject); 
+            if (collision.TryGetComponent<IDamageable>(out var target))
+            {
+                target.TakeDamage(damage);
+                Debug.Log("Dano aplicado! Destruindo flecha.");
+                Destroy(gameObject); 
+                return; 
+            }
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Destroy(gameObject);
         }

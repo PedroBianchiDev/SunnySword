@@ -10,6 +10,8 @@ namespace SunnySword.Player
         private EntityCombat entityCombat;
         private StatsHandler statsHandler;
 
+        public LayerMask enemyLayer;
+
         [Header("Configurações de Ataque")]
         public AttackAbilityData basicAttack;
 

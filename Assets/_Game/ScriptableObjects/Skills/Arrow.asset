@@ -17,6 +17,10 @@ MonoBehaviour:
   icon: {fileID: 0}
   manaCost: 30
   cooldown: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackRange: 1.5
   damageMultiplier: 2
   flatBonusDamage: 10
   damagePopupPrefab: {fileID: 951699920316551086, guid: c40720071c8c35144b199d4bfd99c1fe, type: 3}

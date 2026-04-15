@@ -18,46 +18,64 @@ namespace SunnySword.Combat
             stats = GetComponent<StatsHandler>();
         }
 
-        public void Attack(AttackAbilityData ability, Vector2 targetPos, Sprite[] animSprites, int hitFrame, float range = 1.5f)
+        public void Attack(AttackAbilityData ability, Vector2 targetPos, Sprite[] animSprites, int hitFrame)
         {
-            if (IsAttacking) return;
-            StartCoroutine(AttackRoutine(ability, targetPos, animSprites, hitFrame, range));
+            if (IsAttacking || ability == null) return;
+            StartCoroutine(AttackRoutine(ability, targetPos, animSprites, hitFrame));
         }
 
-        private IEnumerator AttackRoutine(AttackAbilityData ability, Vector2 targetPos, Sprite[] animSprites, int hitFrame, float range)
+        private IEnumerator AttackRoutine(AttackAbilityData ability, Vector2 targetPos, Sprite[] animSprites, int hitFrame)
         {
             IsAttacking = true;
 
             bool flipX = targetPos.x < transform.position.x;
-            float duration = spriteAnimator.PlayAnimation(animSprites, flipX);
+
+            float duration = 0f;
+            if (spriteAnimator != null && animSprites != null)
+            {
+                duration = spriteAnimator.PlayAnimation(animSprites, flipX);
+            }
 
             float delayUntilHit = hitFrame * 0.12f;
             yield return new WaitForSeconds(delayUntilHit);
 
-            if (ability != null)
-            {
-                ability.Execute(this.gameObject, targetPos);
-            }
-            else
-            {
-                float dist = Vector2.Distance(transform.position, targetPos);
-                if (dist <= range + 0.5f)
-                {
-                    if (targetPos != null) 
-                    {
-                        Collider2D hit = Physics2D.OverlapCircle(transform.position, range, LayerMask.GetMask("Player"));
-                        if (hit != null && hit.TryGetComponent<IDamageable>(out var target))
-                        {
-                            target.TakeDamage(stats.Data.baseDamage);
-                        }
-                    }
-                }
-            }
+            ExecuteAbilityImpact(ability, targetPos);
 
             float remainingTime = duration - delayUntilHit;
             if (remainingTime > 0) yield return new WaitForSeconds(remainingTime);
 
             IsAttacking = false;
+        }
+
+        private void ExecuteAbilityImpact(AttackAbilityData ability, Vector2 targetPos)
+        {
+            if (ability is ProjectileAbility)
+            {
+                ability.Execute(this.gameObject, targetPos);
+
+                return;
+            }
+
+            int finalDamage = ability.CalculateDamage(this.gameObject);
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(targetPos, ability.attackRange, ability.targetLayer);
+
+            foreach (Collider2D hit in hits)
+            {
+                if (hit.gameObject == gameObject) continue;
+
+                if (hit.TryGetComponent<IDamageable>(out var target))
+                {
+                    target.TakeDamage(finalDamage);
+                    Debug.Log($"[Combate] {gameObject.name} atingiu {hit.name} com {ability.abilityName}. Dano: {finalDamage}");
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+
         }
     }
 }
